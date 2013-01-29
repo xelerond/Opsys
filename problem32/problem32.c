@@ -103,10 +103,10 @@ int main(int argc, char** argv)
             }
             else
             {
-				FILE* lessf = popen("/usr/bin/less","w");
-                fprintf(lessf,"%s",buffer);
+				FILE* less = popen("/usr/bin/less","w");
+                fprintf(less,"%s",buffer);
                 printf("af");
-                pclose(lessf);
+                pclose(less);
             }
         break;
     }
