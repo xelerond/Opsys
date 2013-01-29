@@ -105,10 +105,6 @@ int main(int argc, char** argv)
             {
 				FILE* less = popen("/usr/bin/less","w");
                 fprintf(less,"%s",buffer);
-<<<<<<< HEAD
-=======
-                printf("af");
->>>>>>> cd8fa1c44b6f535feec98fe4887c1ec53ea3b72a
                 pclose(less);
             }
         break;
