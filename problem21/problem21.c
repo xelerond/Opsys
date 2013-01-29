@@ -28,7 +28,6 @@ void timedprint()
 
 int main(void)
 {
-	daemon(1,1);
 	timedprint();
 	return(0);
 }
