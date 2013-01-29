@@ -103,7 +103,10 @@ int main(int argc, char** argv)
             }
             else
             {
-                puts("too many files");
+				FILE* lessf = popen("/usr/bin/less","w");
+                fprintf(lessf,"%s",buffer);
+                printf("af");
+                pclose(lessf);
             }
         break;
     }
