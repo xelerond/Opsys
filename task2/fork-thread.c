@@ -10,7 +10,7 @@
 
 #include <pthread.h>
 
-
+//bums
 /* Dummy function spawned by every thread/process.  */
 int dummy (void *data)
 {
