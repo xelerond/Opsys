@@ -42,6 +42,7 @@ void measure_forks (unsigned number)
 			case 0:
 				dummy(0);
 				pid[number] = cur_pid;
+				exit(0);
 			case 1:
 				exit(0);
 		}

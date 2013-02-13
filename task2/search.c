@@ -49,11 +49,21 @@ int search (FILE *f, const char *pat)
    XXX: Use a better searching algorihm.  */
 int main (int argc, char *argv[])
 {
-    if (-1 == search (fopen (argv[1], "r"), "test")) {
-        printf ("pattern 'test' was not found in %s\n", argv[1]);
-        return EXIT_FAILURE;
-    } else {
-        printf ("pattern 'test' found in %s\n", argv[1]);
-        return EXIT_SUCCESS;
-    }
+	int counter;
+	for (counter = 2; counter < argc; counter ++)
+	{
+		int pos =0;
+		
+		if(!fopen(argv[counter], "r"))
+		{
+			printf("file '%s' was not found\n", argv[counter]);
+		}
+		else if (-1 == (pos=search(fopen (argv[counter], "r"), argv[1]))) {
+			printf ("pattern '%s' was not found in %s\n",argv[1], argv[counter]);
+		} 
+		else {
+			printf ("pattern '%s' found in %s at position %d\n", argv[1],argv[counter], pos);
+		}
+	}
+	return EXIT_SUCCESS;
 }
