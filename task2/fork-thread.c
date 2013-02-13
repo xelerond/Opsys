@@ -40,16 +40,11 @@ void measure_forks (unsigned number)
 		switch(cur_pid)
 		{
 			case 0:
-				dummy(NULL);
-				//pid[number] = cur_pid;
-				exit(EXIT_SUCCESS);
-				break;
+				dummy(0);
+				pid[number] = cur_pid;
 			case 1:
 				exit(0);
 		}
-		
-		pid[number] = cur_pid;
-
         /* TODO Call FORK,
                 execute DUMMY in a child,
                 save process id.  */
@@ -63,15 +58,11 @@ void measure_forks (unsigned number)
         /* TODO Wait for every process id
                 spawned in the previous loop.  */
     }
-    
-	
+    clock_gettime(CLOCK_REALTIME, &finish);
 
     printf ("process: num=%03u, fork=%03li, wait=%03li, totatl=%03li\n",
             number, xelapsed (stop, start), xelapsed (finish, stop),
             xelapsed (finish, start));
-            
-            
-   
 }
 
 /* Measure the time for NUMBER thread creations.  */
