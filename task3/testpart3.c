@@ -3,6 +3,6 @@
 
 int main (int argc, char * argv[])
 {
-	printf("%d\n", super_malloc());
+	printf("mallocing\n%d\n", super_malloc(100));
 	return 0;
 }
