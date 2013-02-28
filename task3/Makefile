@@ -7,8 +7,9 @@ test-malloc: super_malloc.c testpart3.c
 	$(CC) -o $(OUT) $(IN)
 
 run:
-	@echo "running malloc test file"
+	@echo "running malloc test file\n-\n-\n-\n-"
 	./$(OUT)
+	@echo "-\n-\n-\n-\ncompleted running"
 
 clean:
 	$(RM) *.o $(OUT)
