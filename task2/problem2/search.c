@@ -1,8 +1,8 @@
+//Robbie Henderson - H00011358
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <unistd.h>
-#include <sys/wait.h>
 
 
 /* A function to searcg a substing in a file.  The file F has to be
@@ -42,47 +42,40 @@ int search (FILE *f, const char *pat)
 }
 
 
-void forkfind(int counter, char*arguments[])
-{
-	printf("fork searching %s\n", arguments[counter]);
-	int pos =0;
-	if(!fopen(arguments[counter], "r"))
-	{
-		printf("file '%s' was not found\n", arguments[counter]);
-	}
-	else if (-1 == (pos=search(fopen (arguments[counter], "r"), arguments[1]))) {
-		printf ("pattern '%s' was not found in %s\n",arguments[1], arguments[counter]);
-	} 
-	else {
-		printf ("pattern '%s' found in %s at position %d\n", arguments[1],arguments[counter], pos);
-	}
-}
-
-/* done TODO: Check if the arguments are valid
-   done TODO: Todo, open the file safely
-   done TODO: Execute SEARCH for every file in ARGV
-   done TODO: Print the position found
-   done TODO: Make sure it does not segfaults in case
-         arguments are wrong.
-
-   done XXX: Use a better searching algorihm.  */
 int main (int argc, char *argv[])
 {
-	int pidarray[argc -2];
+  //if not correct arguments
+  if (argc<2)
+  {
+    //explain usage and exit
+    puts("usage - pattern to find, file, file, file, more files");
+    exit(0);
+  }
+  //counter for loop
 	int counter;
+  //for each argument that is a file
 	for (counter = 2; counter < argc; counter ++)
 	{
-		int pid = fork();
-		if (pid == 0)
+    //used to stor position
+		int pos =0;
+		//if the file doe not exist
+		if(!fopen(argv[counter], "r"))
 		{
-			pidarray[counter-2]= pid;
-			forkfind(counter, argv);
-			exit(0);
+      //error message
+			printf("file '%s' was not found\n", argv[counter]);
 		}
-	}
-	for (counter = 0; counter<(argc-2); counter ++)
-	{
-		wait(&pidarray[counter]);
+    //if the pattern is not in the file
+		else if (-1 == (pos=search(fopen (argv[counter], "r"), argv[1])))
+    {
+      //print not found in file
+			printf ("pattern '%s' was not found in %s\n",argv[1], argv[counter]);
+		} 
+    //otherwise
+		else
+    {
+      //print position string was found in file
+			printf ("pattern '%s' found in %s at position %d\n", argv[1],argv[counter], pos);
+		}
 	}
 	return EXIT_SUCCESS;
 }

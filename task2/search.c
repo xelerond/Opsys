@@ -39,17 +39,11 @@ int search (FILE *f, const char *pat)
     return -1;
 }
 
-/* TODO: Check if the arguments are valid
-   TODO: Todo, open the file safely
-   TODO: Execute SEARCH for every file in ARGV
-   TODO: Print the position found
-   TODO: Make sure it does not segfaults in case
-         arguments are wrong.
 
-   XXX: Use a better searching algorihm.  */
 int main (int argc, char *argv[])
 {
 	int counter;
+  //loop from the second argument
 	for (counter = 2; counter < argc; counter ++)
 	{
 		int pos =0;
