@@ -3,6 +3,6 @@
 
 int main (int argc, char * argv[])
 {
-	puts("cake");
+	printf("%d\n", super_malloc());
 	return 0;
 }
