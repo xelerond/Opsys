@@ -1,4 +1,5 @@
 #include <sys/types.h>
+#include <stdio.h>
 
 int super_malloc (size_t size)
 {

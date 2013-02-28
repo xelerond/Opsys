@@ -1,9 +1,9 @@
 IN := super_malloc.c testpart3.c
 OUT := test-malloc
 
-all: test-malloc run clean
+all: compile run clean
 
-test-malloc: super_malloc.c testpart3.c
+compile: super_malloc.c testpart3.c
 	$(CC) -o $(OUT) $(IN)
 
 run:
