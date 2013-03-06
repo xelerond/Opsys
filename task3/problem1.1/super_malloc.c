@@ -1,7 +1,9 @@
+//Robbie Henderson - H00011358
+
 #include <unistd.h>
 #include <stdio.h>
 
-int GB = 1073741824;
+int gig = 1073741824;
 
 struct chunk_info
 {
@@ -20,10 +22,10 @@ void * super_malloc(size_t size)
 {
 	if(start == NULL)
 	{
-		start = (struct chunk_info *) sbrk(GB);
+		start = (struct chunk_info *) sbrk(gig);
 		struct chunk_info * next  = (struct chunk_info*)(((char*)start) + chunk_size);
 		
-		next->size = GB - size - (2*chunk_size);
+		next->size = gig - size - (2*chunk_size);
 		next->on = 0;
 		next->prev = NULL;
 		next->next = NULL;
