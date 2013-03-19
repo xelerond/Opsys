@@ -160,42 +160,43 @@ void threaded (int numThreads)
 }
 
 //main
-int main(int argc, char * argv[])
+int main()
 {
-  //validates input from terminal
-  if (argc != 2 || atoi(argv[1])<=0 || atoi(argv[1]) > 30)
+  puts("1 million iterations for each run-through\n");
+  int i = 0;
+  for (i = 1; i <= 30; i++)
   {
-    puts("input number between 1 and 30 - inclusive");
-    exit(0);
+    printf("threads:= %d\n", i);
+    //save time of start in time struct
+    clock_gettime(CLOCK_REALTIME, &start);
+
+    //intialise array data
+    initData();
+    //run parallel addition
+    threaded(i);
+
+    //save time clock was stopped
+    clock_gettime(CLOCK_REALTIME, &stop);
+
+
+    //print time difference between start and stop in microseconds
+    printf ("run time for parallel%" PRId64 "\n",xelapsed (stop, start));
+
+    //save time of start in time struct
+    clock_gettime(CLOCK_REALTIME, &start);
+    
+    //intialise array data
+    initData();
+    //run sequential addition
+    sequential();
+
+    //save time clock was stopped
+    clock_gettime(CLOCK_REALTIME, &stop);
+    
+    //print time difference between start and stop in microseconds
+    printf ("run time for sequential%" PRId64 "\n",xelapsed (stop, start));
+    puts("\n");
   }
-
-  //save time of start in time struct
-  clock_gettime(CLOCK_REALTIME, &start);
-
-  //intialise array data
-  initData();
-  //run parallel addition
-  threaded(atoi(argv[1]));
-
-  //save time clock was stopped
-  clock_gettime(CLOCK_REALTIME, &stop);
-
-  //print time difference between start and stop in microseconds
-  printf ("run time for parallel\n1 million iterations:=%" PRId64 "\n",xelapsed (stop, start));
-
-  //save time of start in time struct
-  clock_gettime(CLOCK_REALTIME, &start);
-  
-  //intialise array data
-  initData();
-  //run sequential addition
-  sequential();
-
-  //save time clock was stopped
-  clock_gettime(CLOCK_REALTIME, &stop);
-  
-  //print time difference between start and stop in microseconds
-  printf ("run time for sequential\n1 million iterations:=%" PRId64 "\n",xelapsed (stop, start));
 
   //stops angry compiler messages because of int main
   return EXIT_SUCCESS;
