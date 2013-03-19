@@ -6,27 +6,16 @@
 
 #define N_THREADS 16
 #define SIZE 1000
-#define ITERATIONS 100000
+#define ITERATIONS 1000000
 
 #define MIN( a, b)  ((a)<(b)? (a): (b))
 
 //structure of time data from lab 2 fork-thread
 struct timespec start, stop, finish;
 
-//from lab sheet - structure of thread info i beleive
-typedef struct threadArgs threadArgs_t;
-
-struct threadArgs {
-  int tid;
-  int from;
-  int to;
-};
-
 //declare arrays
 double a[SIZE];
 double b[SIZE];
-
-pthread_barrier_t barrier;
 
 //function given in lab exercise 2 from fork-thread
 // Time difference between a and b in microseconds.
@@ -46,8 +35,6 @@ void initData( )
     a[i] = i;
     b[i] = (SIZE-1) - i;
   }
-  //not needed in this part, but will help keep time values the same
-  pthread_barrier_init( &barrier, NULL, N_THREADS);
 }
 
 //sequential element-wise addition of array
@@ -84,7 +71,7 @@ int main()
   clock_gettime(CLOCK_REALTIME, &stop);
 
   //print time difference between start and stop in microseconds
-  printf ("run time for sequential=%03li\n",
+  printf ("run time for sequential\n1 million iterations:=%03li\n",
             xelapsed (stop, start));
 
   //stops angry compiler messages
