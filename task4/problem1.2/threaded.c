@@ -3,6 +3,7 @@
 #include <pthread.h>
 #include <time.h>
 #include <sys/time.h>
+#include "getTime.c"
 
 #define N_THREADS 16
 #define SIZE 1000
@@ -27,7 +28,7 @@ struct threadArgs {
 double a[SIZE];
 double b[SIZE];
 
-pthread_barrier_t barrier;
+//pthread_barrier_t barrier;
 
 //function given in lab exercise 2 from fork-thread
 // Time difference between a and b in microseconds.
@@ -48,7 +49,7 @@ void initData( )
     b[i] = (SIZE-1) - i;
   }
   //not needed in this part, but will help keep time values the same
-  pthread_barrier_init( &barrier, NULL, N_THREADS);
+  //pthread_barrier_init( &barrier, NULL, N_THREADS);
 }
 
 //sequential element-wise addition of array
@@ -80,14 +81,13 @@ void * simd(void *arg)
   
   tid = ((threadArgs_t *)arg)->tid;
   from = ((threadArgs_t *)arg)->from;
-  printf("%d\n",from);
+  printf("%d\n%d\n\n",from, to);
   to = ((threadArgs_t *)arg)->to;
   
   printf("%d\n",to);
-  double g;
+  int g;
   for(g = 0; g <= ITERATIONS;g++)
   { 
-	  printf("%f\n",g);
 	  int i = 0;
 	  for (i = from; i<= to; i++)
 	  {
@@ -152,19 +152,20 @@ void threaded (int numThreads)
 int main()
 {
   //save time of start in time struct
-  clock_gettime(CLOCK_REALTIME, &start);
+  //clock_gettime(CLOCK_REALTIME, &start);
+  current_utc_time(&start);
 
   //intialise array data
   initData();
   //run sequential addition
-  threaded(1);
+  threaded(10);
 
   //save time clock was stopped
-  clock_gettime(CLOCK_REALTIME, &stop);
+  //clock_gettime(CLOCK_REALTIME, &stop);
+  current_utc_time(&stop);
 
   //print time difference between start and stop in microseconds
-  printf ("run time for sequential=%03li\n",
-            xelapsed (stop, start));
+  printf ("run time for sequential=%03li\n",xelapsed (stop, start));
 
   //stops angry compiler messages
   return 0;
