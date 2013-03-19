@@ -6,7 +6,7 @@ array-join: threaded.c
 	$(CC) $(CFLAGS) $^ -o $@ -pthread
 
 run:
-	./array-join
+	./array-join 10
 
 clean:
 	$(RM) *.o array-join

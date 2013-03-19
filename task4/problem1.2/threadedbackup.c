@@ -80,14 +80,10 @@ void * simd(void *arg)
   tid = (intptr_t)((threadArgs_t *)arg)->tid;
   from = ((threadArgs_t *)arg)->from;
   to = ((threadArgs_t *)arg)->to;
-  int g=0;
-  for(g = 0; g <= ITERATIONS;g++)
+  int i = 0;
+  for (i = from; i<= to; i++)
   {
-    int i = 0;
-    for (i = from; i<= to; i++)
-    {
-      a[i] = a[i] + b[i];
-    }
+    a[i] = a[i] + b[i];
   }
   return 0;
 }
@@ -104,12 +100,15 @@ void threaded (int numThreads)
   int thread;
   int i,j = 0;
   int threadsize = (SIZE/numThreads);
+  
+  int g=0;
+  for(g = 0; g <= ITERATIONS;g++)
+  {
     for (i = 0;i < numThreads; i++) 
     {
       pthread_t tid;
       t[i]->from = threadsize * i;
       t[i]->to = t[i]->from + threadsize;
-      printf("%d - %d\n", tid, i);
       t[i]->tid = tid;
       thread = pthread_create(&tid, NULL, simd, (void *)t[i]);
       //outputs error of thread failure
@@ -123,15 +122,12 @@ void threaded (int numThreads)
     }
     for(j = 0; j < numThreads;j++)
     {
-      int tid=(pthread_join(t[j]->tid,NULL));
-      if(tid != 0)
+      if((pthread_join(t[j]->tid,NULL) != 0))
       {
-        printf("%d - %d - %d\n", tid, j, t[j]->tid);
         puts("failed to join");
-        exit(3);
       }
-      printf("%d - %d - %d\n", tid, j, t[j]->tid);
     }
+  }
     
 }
 
