@@ -1,0 +1,139 @@
+//Robbie Henderson - H00011358
+//working with Jonathan Menzies
+
+To test the runtime of my 2 programs I ran the parallel followed by the sequential
+for numbers of threads from 1 to 30
+I used 1000000 iterations as i felt this provided better results as each test took
+several seconds and could provide a reliable average
+
+I was working under mac OSX using the clock_get_realtime Mac created by Blair Murray
+but changed when I found barriers could not be used under OSX
+
+For the tests I used Ubuntu 64-bit with an Intel Core 2 Quad Q6600 and 4Gb of RAM
+
+---------------the results were as follows -----------------------
+threads:= 1
+run time for parallel4172214
+run time for sequential3907946
+
+threads:= 2
+run time for parallel2278538
+run time for sequential3922741
+
+threads:= 3
+run time for parallel1747753
+run time for sequential3909282
+
+threads:= 4
+run time for parallel1463492
+run time for sequential3911980
+
+threads:= 5
+run time for parallel1684628
+run time for sequential3908334
+
+threads:= 6
+run time for parallel1438262
+run time for sequential3910825
+
+threads:= 7
+run time for parallel1488811
+run time for sequential3915154
+
+threads:= 8
+run time for parallel1399749
+run time for sequential3918612
+
+threads:= 9
+run time for parallel1476187
+run time for sequential3912927
+
+threads:= 10
+run time for parallel1347878
+run time for sequential3911697
+
+threads:= 11
+run time for parallel1472828
+run time for sequential3909017
+
+threads:= 12
+run time for parallel1242524
+run time for sequential3916327
+
+threads:= 13
+run time for parallel1442717
+run time for sequential3908779
+
+threads:= 14
+run time for parallel1296833
+run time for sequential3914009
+
+threads:= 15
+run time for parallel1379108
+run time for sequential3910917
+
+threads:= 16
+run time for parallel1332683
+run time for sequential3910547
+
+threads:= 17
+run time for parallel1271983
+run time for sequential3907518
+
+threads:= 18
+run time for parallel1314926
+run time for sequential3909451
+
+threads:= 19
+run time for parallel1331766
+run time for sequential3907477
+
+threads:= 20
+run time for parallel1253993
+run time for sequential3907487
+
+threads:= 21
+run time for parallel1313787
+run time for sequential3914747
+
+threads:= 22
+run time for parallel1284741
+run time for sequential3934401
+
+threads:= 23
+run time for parallel1405746
+run time for sequential3924269
+
+threads:= 24
+run time for parallel1372258
+run time for sequential3910042
+
+threads:= 25
+run time for parallel1226962
+run time for sequential3916964
+
+threads:= 26
+run time for parallel1301133
+run time for sequential3916379
+
+threads:= 27
+run time for parallel1228423
+run time for sequential3910900
+
+threads:= 28
+run time for parallel1241351
+run time for sequential3907586
+
+threads:= 29
+run time for parallel1243843
+run time for sequential3904559
+
+threads:= 30
+run time for parallel1301394
+run time for sequential3909998
+-------------------------------------------------------------
+
+The results are quite clearly faster with the parallel function
+and with larger numbers of threads
+however the difference seems to increase less towards the larger thread numbers
+and even takes longer in the very last examples.  

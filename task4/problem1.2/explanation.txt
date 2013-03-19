@@ -1,0 +1,3 @@
+It was assumed for this part that the threads would deal with a chunk of the array each as oposed to a chunk of the iterations each
+
+I could not work out which from the lab sheet, however to change from one to the other the iterations loop must simply be move from simd() to threaded() and surround the thred creation part of threaded().  

@@ -1,3 +1,6 @@
+//Robbie Henderson - H00011358
+//working with Jonathan Menzies
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <pthread.h>

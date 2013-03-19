@@ -1,3 +1,6 @@
+//Robbie Henderson - H00011358
+//working with Jonathan Menzies
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <pthread.h>
@@ -7,8 +10,7 @@
 
 #define N_THREADS 16
 #define SIZE 1000
-//set iterations higher as result time was too small
-#define ITERATIONS 100000
+#define ITERATIONS 10000
 
 #define MIN( a, b)  ((a)<(b)? (a): (b))
 
@@ -101,7 +103,7 @@ void * simd(void *arg)
 	  if(barry != 0 && barry != PTHREAD_BARRIER_SERIAL_THREAD)//if barrier wait fails 
 	  {
 		   printf("thread did not wait for barrier\n");//outputs error message
-		   exit(EXIT_FAILURE);
+		   pthread_exit(NULL);
 	  }
   }
   //happy compiler = happy me
