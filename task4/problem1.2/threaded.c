@@ -84,12 +84,12 @@ void * simd(void *arg)
   to = ((threadArgs_t *)arg)->to;
   
   printf("%d\n",to);
-  int g;
-  for(g = 0; g <= 1;g++)
+  double g;
+  for(g = 0; g <= ITERATIONS;g++)
   { 
-	  puts("josh don't like cricket");
+	  printf("%f\n",g);
 	  int i = 0;
-	  for (i = 0; i< 10; i++)
+	  for (i = from; i<= to; i++)
 	  {
 		a[i] = a[i] + b[i];
 		
