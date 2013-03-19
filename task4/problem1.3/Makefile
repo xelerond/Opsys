@@ -6,7 +6,7 @@ array-join: comparison.c
 	$(CC) $(CFLAGS) $^ -o $@ -lrt -pthread
 
 run:
-	./array-join 10
+	./array-join
 
 clean:
 	$(RM) *.o array-join
