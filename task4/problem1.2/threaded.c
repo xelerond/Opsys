@@ -70,6 +70,23 @@ void sequential()
   }
 }
 
+void simd( void *arg)
+{
+  int tid,from,to;
+
+  tid = ((threadArgs_t *)arg)->tid;
+  from = ((threadArgs_t *)arg)->from;
+  to = ((threadArgs_t *)arg)->to;
+
+  // Here, the addition happens....
+}
+
+//not sure if this is needed, but here you go mr john
+void threaded ()
+{
+
+}
+
 int main()
 {
   //save time of start in time struct
