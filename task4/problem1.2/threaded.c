@@ -15,9 +15,10 @@ struct timespec start, stop, finish;
 
 //from lab sheet - structure of thread info i beleive
 typedef struct threadArgs threadArgs_t;
+threadArgs_t ** t ;
 
 struct threadArgs {
-  int tid;
+  pthread_t tid;
   int from;
   int to;
 };
@@ -70,25 +71,82 @@ void sequential()
   }
 }
 
-void simd( void *arg)
+void * simd(void *arg)
 {
+  puts("im here");
   int tid,from,to;
-
+  
+  //struct threadArg * ta = (struct threadArg *) arg;
+  
   tid = ((threadArgs_t *)arg)->tid;
   from = ((threadArgs_t *)arg)->from;
+  printf("%d\n",from);
   to = ((threadArgs_t *)arg)->to;
   
-  int i = 0;
-  for (i = from; i< to; i++)
-  {
-    a[i] = a[i] + b[i];
+  printf("%d\n",to);
+  int g;
+  for(g = 0; g <= 1;g++)
+  { 
+	  puts("josh don't like cricket");
+	  int i = 0;
+	  for (i = 0; i< 10; i++)
+	  {
+		a[i] = a[i] + b[i];
+		
+	  }
   }
+  puts("le cake");
+  return 0;
 }
 
 //not sure if this is needed, but here you go mr john
-void threaded ()
+void threaded (int numThreads)
 {
-
+	int z = 0;
+	t = malloc(numThreads*sizeof(threadArgs_t *));
+	for(z = 0; z < numThreads;z++)
+	{
+		t[z] = malloc(sizeof(threadArgs_t ));
+	}
+	int thread;
+	int i,j = 0;
+	//thread id array
+    //id of current thread
+    int threadsize = (SIZE/numThreads);
+    //printf("%d",threadsize);
+    
+		for (i = 0;i < numThreads; i++) 
+		{
+			pthread_t tid;
+			t[i]->from = threadsize * i;
+			t[i]->to = t[i]->from + threadsize;
+			t[i]->tid = tid;
+			printf("from:- %d to:- %d",t[i]->from,t[i]->to);	
+			//create a thread and store success value of creation
+			//also runs dummy inside thread
+			puts("id this running?");
+			thread = pthread_create(&tid, NULL, simd, (void *)t[i]);
+			//printf("%d\n",from);
+			// printf("%d\n",to);
+			puts("success");
+			//outputs error of thread failure
+			if(thread > 0)
+			{
+				puts("Thread could not be created");
+			}
+			//stores current thread id
+			
+		}
+		for(j = 0; j < numThreads;j++)
+		{
+			if((pthread_join(t[j]->tid,NULL) != 0))
+			{
+				puts("failed to join");
+			}
+			else
+				puts("shawaz");
+		}
+		
 }
 
 int main()
@@ -99,7 +157,7 @@ int main()
   //intialise array data
   initData();
   //run sequential addition
-  sequential();
+  threaded(1);
 
   //save time clock was stopped
   clock_gettime(CLOCK_REALTIME, &stop);
