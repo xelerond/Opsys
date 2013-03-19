@@ -5,10 +5,10 @@
 #include <sys/time.h>
 #include <inttypes.h>
 
-#define N_THREADS 10
+#define N_THREADS 16
 #define SIZE 1000
 //set iterations higher as result time was too small
-#define ITERATIONS 1000
+#define ITERATIONS 100000
 
 #define MIN( a, b)  ((a)<(b)? (a): (b))
 
@@ -30,7 +30,7 @@ struct threadArgs {
 double a[SIZE];
 double b[SIZE];
 
-//only needed for part 4
+//only needed for part 4 - which is now
 pthread_barrier_t barrier;
 
 //function given in lab exercise 2 from fork-thread
@@ -51,7 +51,7 @@ void initData( )
     a[i] = i;
     b[i] = (SIZE-1) - i;
   }
-  //not needed in this part, but will help keep time values the same
+  //now needed for barrier wait
   pthread_barrier_init( &barrier, NULL, N_THREADS);
 }
 
@@ -79,8 +79,7 @@ void sequential()
 void * simd(void *arg)
 {
   //data taken out of struct
-  int tid,from,to;
-  tid = (intptr_t)((threadArgs_t *)arg)->tid;
+  int from,to;
   from = ((threadArgs_t *)arg)->from;
   to = ((threadArgs_t *)arg)->to;
 
