@@ -5,10 +5,10 @@
 #include <sys/time.h>
 #include <inttypes.h>
 
-#define N_THREADS 16
+#define N_THREADS 10
 #define SIZE 1000
 //set iterations higher as result time was too small
-#define ITERATIONS 1
+#define ITERATIONS 1000
 
 #define MIN( a, b)  ((a)<(b)? (a): (b))
 
@@ -93,10 +93,17 @@ void * simd(void *arg)
     //carry out single array addition
     //essentially the same as in sequential
     int i = 0;
+    int barry;
     for (i = from; i<= to; i++)
     {
       a[i] = a[i] + b[i];
     }
+    barry = pthread_barrier_wait(&barrier);//performs barrier wait
+	  if(barry != 0 && barry != PTHREAD_BARRIER_SERIAL_THREAD)//if barrier wait fails 
+	  {
+		   printf("thread did not wait for barrier\n");//outputs error message
+		   exit(EXIT_FAILURE);
+	  }
   }
   //happy compiler = happy me
   return 0;
