@@ -164,6 +164,8 @@ int main()
 {
   puts("1 million iterations for each run-through\n");
   int i = 0;
+  //loop for all thred numbers 1 to 30
+  //see which is fastest
   for (i = 1; i <= 30; i++)
   {
     printf("threads:= %d\n", i);
