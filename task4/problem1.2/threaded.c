@@ -77,8 +77,12 @@ void simd( void *arg)
   tid = ((threadArgs_t *)arg)->tid;
   from = ((threadArgs_t *)arg)->from;
   to = ((threadArgs_t *)arg)->to;
-
-  // Here, the addition happens....
+  
+  int i = 0;
+  for (i = from; i< to; i++)
+  {
+    a[i] = a[i] + b[i];
+  }
 }
 
 //not sure if this is needed, but here you go mr john
